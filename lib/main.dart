@@ -227,25 +227,23 @@ class _HomePageState extends State<HomePage> {
     ];
 
     // 在 _HomePageState 類中的 build 方法中：
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Blog Developer'),
-          centerTitle: true,
-          backgroundColor: Colors.orange,
-        ),
-        body: tabs[_currentIndex],
-        drawer: width <= 600
-            ? Drawer(
-                child: drawerContent(),
-              )
-            : null, // 如果宽度小于或等于600像素，则为手机
-        endDrawer: width > 600
-            ? Drawer(
-                child: drawerContent(),
-              )
-            : null, // 如果宽度大于600像素，则为平板
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Blog Developer'),
+        centerTitle: true,
+        backgroundColor: Colors.orange,
       ),
+      body: tabs[_currentIndex],
+      drawer: width <= 600
+          ? Drawer(
+              child: drawerContent(),
+            )
+          : null, // 如果宽度小于或等于600像素，则为手机
+      endDrawer: width > 600
+          ? Drawer(
+              child: drawerContent(),
+            )
+          : null, // 如果宽度大于600像素，则为平板
     );
   }
 
@@ -269,6 +267,7 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               _currentIndex = 0;
             });
+            Navigator.pop(context);
           },
         ),
         ListTile(
@@ -278,6 +277,7 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               _currentIndex = 1;
             });
+            Navigator.pop(context);
           },
         ),
         ListTile(
@@ -287,6 +287,7 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               _currentIndex = 2;
             });
+            Navigator.pop(context);
           },
         ),
         ListTile(
