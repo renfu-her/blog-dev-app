@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -126,7 +125,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    
                   ),
                 );
               }),
@@ -226,6 +224,7 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
 
+    // 在 _HomePageState 類中的 build 方法中：
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -234,27 +233,59 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.orange,
         ),
         body: tabs[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.rss_feed),
-              label: 'Blog',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.cases_sharp),
-              label: '案例',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.devices_other),
-              label: '其他文章',
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Menu'),
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.rss_feed),
+                title: Text('Blog'),
+                onTap: () {
+                  setState(() {
+                    _currentIndex = 0;
+                  });
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.cases_sharp),
+                title: Text('案例'),
+                onTap: () {
+                  setState(() {
+                    _currentIndex = 1;
+                  });
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.devices_other),
+                title: Text('其他文章'),
+                onTap: () {
+                  // Navigator.pop(context);
+                  setState(() {
+                    _currentIndex = 2;
+                  });
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.privacy_tip),
+                title: Text('隱私權政策'),
+                onTap: () {
+                  // Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PrivacyPolicyPage()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -336,6 +367,53 @@ class _SplashScreenState extends State<SplashScreen>
                   MaterialPageRoute(builder: (context) => const HomePage()),
                 ));
         },
+      ),
+    );
+  }
+}
+
+class PrivacyPolicyPage extends StatefulWidget {
+  @override
+  _PrivacyPolicyPageState createState() => _PrivacyPolicyPageState();
+}
+
+class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
+  String? _privacyPolicyContent;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPrivacyPolicy();
+  }
+
+  Future<void> _fetchPrivacyPolicy() async {
+    final response = await http.get(Uri.parse(
+        'https://blog.dev-laravel.co/api/get_policy/1')); // 替换为您的隐私策略URL
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      setState(() {
+        _privacyPolicyContent = responseData['content']; // 提取content字段
+      });
+    } else {
+      setState(() {
+        _privacyPolicyContent = 'Failed to load privacy policy.';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('隱私權政策'),
+        backgroundColor: Colors.orange,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: _privacyPolicyContent != null
+            ? Html(data: _privacyPolicyContent!)
+            : CircularProgressIndicator(), // 在加载内容时显示一个加载指示器
       ),
     );
   }
