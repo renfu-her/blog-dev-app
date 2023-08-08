@@ -81,6 +81,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     final tabs = [
       // Home Page
       ListView(
@@ -233,65 +235,71 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.orange,
         ),
         body: tabs[_currentIndex],
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              DrawerHeader(
-                child: Container(),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        'https://blog.dev-laravel.co/images/favicon.png'), // 请替换为您的图像URL
-                    fit: BoxFit.cover, // 使用BoxFit.cover使图像填充整个DrawerHeader
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.rss_feed),
-                title: Text('Blog'),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = 0;
-                  });
-                  // Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.cases_sharp),
-                title: Text('案例'),
-                onTap: () {
-                  setState(() {
-                    _currentIndex = 1;
-                  });
-                  // Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.devices_other),
-                title: Text('其他文章'),
-                onTap: () {
-                  // Navigator.pop(context);
-                  setState(() {
-                    _currentIndex = 2;
-                  });
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.privacy_tip),
-                title: Text('隱私權政策'),
-                onTap: () {
-                  // Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PrivacyPolicyPage()),
-                  );
-                },
-              ),
-            ],
+        drawer: width <= 600
+            ? Drawer(
+                child: drawerContent(),
+              )
+            : null, // 如果宽度小于或等于600像素，则为手机
+        endDrawer: width > 600
+            ? Drawer(
+                child: drawerContent(),
+              )
+            : null, // 如果宽度大于600像素，则为平板
+      ),
+    );
+  }
+
+  Widget drawerContent() {
+    return ListView(
+      children: <Widget>[
+        DrawerHeader(
+          child: Container(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                  'https://blog.dev-laravel.co/images/favicon.png'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
+        ListTile(
+          leading: Icon(Icons.rss_feed),
+          title: Text('Blog'),
+          onTap: () {
+            setState(() {
+              _currentIndex = 0;
+            });
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.cases_sharp),
+          title: Text('案例'),
+          onTap: () {
+            setState(() {
+              _currentIndex = 1;
+            });
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.devices_other),
+          title: Text('其他文章'),
+          onTap: () {
+            setState(() {
+              _currentIndex = 2;
+            });
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.privacy_tip),
+          title: Text('隱私權政策'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PrivacyPolicyPage()),
+            );
+          },
+        ),
+      ],
     );
   }
 }
