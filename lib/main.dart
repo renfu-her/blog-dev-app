@@ -237,9 +237,13 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: <Widget>[
               DrawerHeader(
-                child: Text('Menu'),
+                child: Container(),
                 decoration: BoxDecoration(
-                  color: Colors.orange,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        'https://blog.dev-laravel.co/images/favicon.png'), // 请替换为您的图像URL
+                    fit: BoxFit.cover, // 使用BoxFit.cover使图像填充整个DrawerHeader
+                  ),
                 ),
               ),
               ListTile(
