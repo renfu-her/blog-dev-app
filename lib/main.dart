@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> {
     // 在 _HomePageState 類中的 build 方法中：
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog Developer'),
+        title: const Text('開發 & 程式 Blog'),
         centerTitle: true,
         backgroundColor: Colors.orange,
       ),
