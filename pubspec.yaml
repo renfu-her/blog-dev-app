@@ -17,6 +17,7 @@ dependencies:
   http: ^1.1.0
   simple_html_css: ^4.0.0
   flutter_html: ^3.0.0-beta.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -33,3 +34,7 @@ flutter:
 
   uses-material-design: true
 
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/icon.png"
