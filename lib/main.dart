@@ -132,6 +132,7 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
           ),
+          SizedBox(height: 20.0),
         ],
       ),
       // Travel Page
@@ -177,6 +178,7 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
           ),
+          SizedBox(height: 20.0),
         ],
       ),
       // Contact Us Page
@@ -222,6 +224,7 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
           ),
+          SizedBox(height: 20.0),
         ],
       ),
     ];
