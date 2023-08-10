@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 200,
+            height: MediaQuery.of(context).size.height - 310,
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(blogs.length, (index) {
@@ -132,7 +132,6 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
           ),
-          SizedBox(height: 20.0),
         ],
       ),
       // Travel Page
@@ -151,7 +150,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 200,
+            height: MediaQuery.of(context).size.height - 310,
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(cases.length, (index) {
@@ -178,7 +177,6 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
           ),
-          SizedBox(height: 20.0),
         ],
       ),
       // Contact Us Page
@@ -197,7 +195,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 200,
+            height: MediaQuery.of(context).size.height - 310,
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(others.length, (index) {
@@ -224,7 +222,6 @@ class _HomePageState extends State<HomePage> {
               }),
             ),
           ),
-          SizedBox(height: 20.0),
         ],
       ),
     ];
