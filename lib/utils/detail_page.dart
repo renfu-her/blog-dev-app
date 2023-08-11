@@ -6,7 +6,7 @@ import 'package:flutter_html/flutter_html.dart';
 class DetailPage extends StatelessWidget {
   final Map<String, dynamic> article;
 
-  DetailPage({required this.article});
+  const DetailPage({required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Image.network(article['image_url'], fit: BoxFit.cover),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Html(
                 data: article['content'],
                 style: {

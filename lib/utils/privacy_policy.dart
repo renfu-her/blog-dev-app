@@ -37,14 +37,14 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('隱私權政策'),
+        title: const Text('隱私權政策'),
         backgroundColor: Colors.orange,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: _privacyPolicyContent != null
             ? Html(data: _privacyPolicyContent!)
-            : CircularProgressIndicator(), // 在加载内容时显示一个加载指示器
+            : const CircularProgressIndicator(), // 在加载内容时显示一个加载指示器
       ),
     );
   }

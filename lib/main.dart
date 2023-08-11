@@ -141,8 +141,8 @@ class _HomePageState extends State<HomePage> {
           Image.network(
               'https://blog.dev-laravel.co/upload/menu-images/4/1690272126.png',
               fit: BoxFit.cover),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Text(
               '案例', // 添加的文字
               style: TextStyle(
@@ -150,20 +150,20 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center, // 设置文本居中显示
             ),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height - 310,
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(cases.length, (index) {
                 return Card(
                   child: ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     leading: FractionallySizedBox(
                         widthFactor: 0.3,
                         child: Image.network(cases[index]['image_url'],
                             fit: BoxFit.cover)),
                     title: Text(cases[index]['title'],
-                        style: TextStyle(fontSize: 18.0)),
+                        style: const TextStyle(fontSize: 18.0)),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -186,8 +186,8 @@ class _HomePageState extends State<HomePage> {
           Image.network(
               'https://raw.gitmirror.com/renfu-her/image-drive/main/others.jpg',
               fit: BoxFit.cover),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Text(
               '其他文章', // 添加的文字
               style: TextStyle(
@@ -195,20 +195,20 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center, // 设置文本居中显示
             ),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height - 310,
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(others.length, (index) {
                 return Card(
                   child: ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     leading: FractionallySizedBox(
                         widthFactor: 0.3,
                         child: Image.network(others[index]['image_url'],
                             fit: BoxFit.cover)),
                     title: Text(others[index]['title'],
-                        style: TextStyle(fontSize: 18.0)),
+                        style: const TextStyle(fontSize: 18.0)),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -252,18 +252,18 @@ class _HomePageState extends State<HomePage> {
     return ListView(
       children: <Widget>[
         DrawerHeader(
-          child: Container(),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
                   'https://blog.dev-laravel.co/images/favicon.png'),
               fit: BoxFit.cover,
             ),
           ),
+          child: Container(),
         ),
         ListTile(
-          leading: Icon(Icons.rss_feed),
-          title: Text('Blog'),
+          leading: const Icon(Icons.rss_feed),
+          title: const Text('Blog'),
           onTap: () {
             setState(() {
               _currentIndex = 0;
@@ -272,8 +272,8 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.cases_sharp),
-          title: Text('案例'),
+          leading: const Icon(Icons.cases_sharp),
+          title: const Text('案例'),
           onTap: () {
             setState(() {
               _currentIndex = 1;
@@ -282,8 +282,8 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.devices_other),
-          title: Text('其他文章'),
+          leading: const Icon(Icons.devices_other),
+          title: const Text('其他文章'),
           onTap: () {
             setState(() {
               _currentIndex = 2;
@@ -292,8 +292,8 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.privacy_tip),
-          title: Text('隱私權政策'),
+          leading: const Icon(Icons.privacy_tip),
+          title: const Text('隱私權政策'),
           onTap: () {
             Navigator.push(
               context,
