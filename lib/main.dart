@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_html/flutter_html.dart';
+import 'package:blog_dev/utils/detail_page.dart';
+import 'package:blog_dev/utils/splash_screen.dart';
+import 'package:blog_dev/utils/privacy_policy.dart';
 
 void main() {
   runApp(MyApp());
@@ -301,133 +302,6 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ],
-    );
-  }
-}
-
-// detail page
-class DetailPage extends StatelessWidget {
-  final Map<String, dynamic> article;
-
-  DetailPage({required this.article});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(article['title']),
-        backgroundColor: Colors.orange,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Image.network(article['image_url'], fit: BoxFit.cover),
-              SizedBox(height: 8.0),
-              Html(
-                data: article['content'],
-                style: {
-                  "pre": Style(
-                    backgroundColor: Colors.grey[300],
-                    color: Colors.black87,
-                  ),
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// splash screen
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen>
-    with TickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 5),
-      vsync: this,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Lottie.asset(
-        'assets/blog.json',
-        controller: _controller,
-        height: MediaQuery.of(context).size.height * 1,
-        animate: true,
-        onLoaded: (composition) {
-          _controller
-            ..duration = composition.duration
-            ..forward().whenComplete(() => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                ));
-        },
-      ),
-    );
-  }
-}
-
-class PrivacyPolicyPage extends StatefulWidget {
-  @override
-  _PrivacyPolicyPageState createState() => _PrivacyPolicyPageState();
-}
-
-class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
-  String? _privacyPolicyContent;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchPrivacyPolicy();
-  }
-
-  Future<void> _fetchPrivacyPolicy() async {
-    final response = await http.get(Uri.parse(
-        'https://blog.dev-laravel.co/api/get_policy/1')); // 替换为您的隐私策略URL
-
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      setState(() {
-        _privacyPolicyContent = responseData['content']; // 提取content字段
-      });
-    } else {
-      setState(() {
-        _privacyPolicyContent = 'Failed to load privacy policy.';
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('隱私權政策'),
-        backgroundColor: Colors.orange,
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: _privacyPolicyContent != null
-            ? Html(data: _privacyPolicyContent!)
-            : CircularProgressIndicator(), // 在加载内容时显示一个加载指示器
-      ),
     );
   }
 }
