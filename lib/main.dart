@@ -6,7 +6,7 @@ import 'package:blog_dev/utils/splash_screen.dart';
 import 'package:blog_dev/utils/privacy_policy.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -96,8 +96,8 @@ class _HomePageState extends State<HomePage> {
                   fit: BoxFit.cover),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Text(
               'Blog', // 添加的文字
               style: TextStyle(
@@ -105,34 +105,42 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center, // 设置文本居中显示
             ),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height - 310,
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(blogs.length, (index) {
-                return Card(
-                  child: ListTile(
-                    contentPadding: EdgeInsets.all(10.0),
-                    leading: FractionallySizedBox(
-                        widthFactor: 0.3,
-                        child: Image.network(blogs[index]['image_url'],
-                            fit: BoxFit.cover)),
-                    title: Text(blogs[index]['title'],
-                        style: TextStyle(fontSize: 18.0)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              DetailPage(article: blogs[index]),
+                return SizedBox(
+                  height: 120.0,
+                  child: Card(
+                    child: Center(
+                      // 使用 Center widget 使內部的 ListTile 垂直置中
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        leading: FractionallySizedBox(
+                          widthFactor: 0.3,
+                          heightFactor: 1.0,
+                          child: Image.network(blogs[index]['image_url'],
+                              fit: BoxFit.cover),
                         ),
-                      );
-                    },
+                        title: Text(blogs[index]['title'],
+                            style: const TextStyle(fontSize: 18.0)),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(article: blogs[index]),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
               }),
             ),
-          ),
+          )
         ],
       ),
       // Travel Page
@@ -155,29 +163,37 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(cases.length, (index) {
-                return Card(
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(10.0),
-                    leading: FractionallySizedBox(
-                        widthFactor: 0.3,
-                        child: Image.network(cases[index]['image_url'],
-                            fit: BoxFit.cover)),
-                    title: Text(cases[index]['title'],
-                        style: const TextStyle(fontSize: 18.0)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              DetailPage(article: cases[index]),
+                return SizedBox(
+                  height: 120.0,
+                  child: Card(
+                    child: Center(
+                      // 使用 Center widget 使內部的 ListTile 垂直置中
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        leading: FractionallySizedBox(
+                          widthFactor: 0.3,
+                          heightFactor: 1.0,
+                          child: Image.network(cases[index]['image_url'],
+                              fit: BoxFit.cover),
                         ),
-                      );
-                    },
+                        title: Text(cases[index]['title'],
+                            style: const TextStyle(fontSize: 18.0)),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(article: cases[index]),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
               }),
             ),
-          ),
+          )
         ],
       ),
       // Contact Us Page
@@ -200,29 +216,37 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               padding: const EdgeInsets.all(10.0),
               children: List.generate(others.length, (index) {
-                return Card(
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(10.0),
-                    leading: FractionallySizedBox(
-                        widthFactor: 0.3,
-                        child: Image.network(others[index]['image_url'],
-                            fit: BoxFit.cover)),
-                    title: Text(others[index]['title'],
-                        style: const TextStyle(fontSize: 18.0)),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              DetailPage(article: others[index]),
+                return SizedBox(
+                  height: 120.0,
+                  child: Card(
+                    child: Center(
+                      // 使用 Center widget 使內部的 ListTile 垂直置中
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        leading: FractionallySizedBox(
+                          widthFactor: 0.3,
+                          heightFactor: 1.0,
+                          child: Image.network(others[index]['image_url'],
+                              fit: BoxFit.cover),
                         ),
-                      );
-                    },
+                        title: Text(others[index]['title'],
+                            style: const TextStyle(fontSize: 18.0)),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(article: others[index]),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
               }),
             ),
-          ),
+          )
         ],
       ),
     ];
